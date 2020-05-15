@@ -1,4 +1,5 @@
 from django import forms
+from .models import TypePrint, Production, Colorfulness
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -115,4 +116,35 @@ class UserRegisterForm(UserCreationForm):
         if email_query.exists():
             raise forms.ValidationError('Такой адресс электронной почты уже существует')
         return email
+
+
+class CalculateForm(forms.Form):
+    production = forms.ChoiceField(label="Тип продукции",widget=forms.Select(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Выберите тип продукции'
+        }
+    ), choices=[(obj.name_product,obj.name_product) for obj in Production.objects.all()])
+    colorfulness = forms.ChoiceField(label="Красочность", widget=forms.Select(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Выберите красочность'
+        }
+    ), choices=[(obj.colorfulness,obj.colorfulness) for obj in Colorfulness.objects.all()])
+    count = forms.IntegerField(label="Тираж", widget=forms.NumberInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Введите тираж'
+        }
+    ))
+    
+    class Meta:
+        model = TypePrint
+        fields = [
+            "production",
+            "colorfulness",
+            "count"
+        ]
+
+
 

@@ -1,0 +1,7 @@
+<form class="form-horizontal" method="post" action="{% url 'core:calculate' %}">
+    {% csrf_token %}
+    {{ calc_form.as_p }}
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Расчитать</button>
+    </div>
+</form>
