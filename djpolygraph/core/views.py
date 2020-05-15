@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
+from .models import TypePrint
 from django.contrib.auth import authenticate, login, logout
-from .forms import UserLoginForm, UserRegisterForm
+from .forms import UserLoginForm, UserRegisterForm, CalculateForm
 
 
 def home(request):
@@ -35,5 +36,20 @@ def register(request):
 def logout_view(request):
     logout(request)
     return render(request, 'core/home.html')
+
+
+def calculate_view(request):
+    form = CalculateForm(request.POST or None)
+    if form.is_valid():
+        colorfulness = form.cleaned_data.get('colorfulness')
+        production = form.cleaned_data.get('production')
+        count = form.cleaned_data.get('count')
+        # List with available types of printing
+        type_printing = TypePrint.objects.filter(
+            production__name_product__icontains=production,
+            )
+        print(colorfulness, production, count)
+        return render(request, 'core/home.html')
+    return render(request, 'core/home.html', {'calc_form': form})
 
 
