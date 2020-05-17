@@ -1,0 +1,60 @@
+{% extends 'core/home.html' %}
+{% load static%}
+
+{% block content %}
+<form class="form-horizontal" method="post" action="{% url 'core:calculate' %}">
+    {% csrf_token %}
+    {{ calc_form.as_p }}
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Расчитать</button>
+    </div>
+</form>
+
+<script>
+$(document).ready(function(){
+    initPaperChoice();
+    $('#id_production').change(function(){
+        var selected = $('#id_production option:selected').text();
+        request_url = `http://localhost:8000/api/${selected}/`;
+        $.ajax({
+            url: request_url,
+            success: function(data){
+                data: data,
+                $('#id_paper').html('<option selected="' + "selected" + '">' + '' +'</option>');
+                
+                for (var i=0; i<data[0]['paper'].length; i++){
+                    $('#id_paper').append('<option value="' + data[0]['paper'][i] + '">'+ data[0]['paper'][i] + '</option>');
+                }
+                
+            },
+            errors: function(err){
+                console.log(err);
+            }
+        })
+        
+    })  
+})
+
+function initPaperChoice(){
+    var default_value = $('#id_production option:selected').text();
+    request_url = `http://localhost:8000/api/${default_value}/`;
+    $.ajax({
+            url: request_url,
+            success: function(data){
+                data: data,
+                $('#id_paper').html('<option selected="' + "selected" + '">' + '' +'</option>');
+                
+                for (var i=0; i<data[0]['paper'].length; i++){
+                    $('#id_paper').append('<option value="' + data[0]['paper'][i] + '">'+ data[0]['paper'][i] + '</option>');
+                }
+                
+            },
+            errors: function(err){
+                console.log(err);
+            }
+    })
+}
+</script>
+
+{% endblock content %}
+

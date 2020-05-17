@@ -1,5 +1,5 @@
 from django import forms
-from .models import TypePrint, Production, Colorfulness
+from .models import TypePrint, Production, Colorfulness, Profile, Paper
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -100,7 +100,7 @@ class UserRegisterForm(UserCreationForm):
     def clean_password(self, *args, **kwargs):
         password1 = self.cleaned_data.get('password')
         if len(password1) < 8:
-            raise forms.ValidationError('Пароль должен содержать 8 или более символов')
+            raise forms.ValidationError('Пароль должен содержать 8 или более символов') 
         return password1
 
     def clean_password2(self, *args, **kwargs):
@@ -122,29 +122,41 @@ class CalculateForm(forms.Form):
     production = forms.ChoiceField(label="Тип продукции",widget=forms.Select(
         attrs={
             'class': 'form-control',
-            'placeholder': 'Выберите тип продукции'
-        }
+            'placeholder': 'Выберите тип продукции',
+            'autocomplete': 'off',
+        }   
     ), choices=[(obj.name_product,obj.name_product) for obj in Production.objects.all()])
     colorfulness = forms.ChoiceField(label="Красочность", widget=forms.Select(
         attrs={
             'class': 'form-control',
-            'placeholder': 'Выберите красочность'
+            'placeholder': 'Выберите красочность',
+            'autocomplete': 'off'
         }
     ), choices=[(obj.colorfulness,obj.colorfulness) for obj in Colorfulness.objects.all()])
     count = forms.IntegerField(label="Тираж", widget=forms.NumberInput(
         attrs={
             'class': 'form-control',
-            'placeholder': 'Введите тираж'
+            'placeholder': 'Введите тираж',
+            'autocomplete': 'off',
         }
     ))
-    
+
+    paper = forms.ChoiceField(label="Максим Бумага", widget=forms.Select(
+        attrs={
+            'class': 'form-control',
+            'id': 'id_paper',
+            'autocomplete': 'off'
+        }
+    ), choices=[(obj, obj) for obj in Paper.objects.all()])
+
     class Meta:
         model = TypePrint
         fields = [
             "production",
             "colorfulness",
-            "count"
+            "count",
         ]
+    
 
 
 

@@ -1,9 +1,9 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <title> calculator </title>
+  {% block styles %}
   <meta charset="utf-8">
     <link rel="shortcut icon" href="#" type="image/png">
     <link rel="stylesheet" href="{% static 'core/bootstrap/css/bootstrap.min.css' %}">
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{% static 'core/css/jquery.lineProgressbar.min.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'core/css/responsive.css' %}">
-
+  {% endblock styles %}
 </head>
 <body data-offset="70" data-target="#side-nav" data-spy="scroll">
 <!--Preloader Section Start-->
@@ -37,7 +37,7 @@
                     <div class="col-md-3">
                         <!-- START LOGO DESIGN AREA -->
                         <div class="logo-theme">
-                            <a href="#">
+                            <a href="{% url 'core:home-page' %}">
                                 <p>calculator 2.0</p>
                             </a>
                         </div>
@@ -56,11 +56,11 @@
                                 </div>
                                 <div class="navbar-collapse collapse">
                                     <ul class="nav navbar-nav navbar-right">
-                                        <li><a class="smoth-scroll" href="#home">Главная</a>
+                                        <li><a class="smoth-scroll" href="{% url 'core:home-page'%}">Главная</a>
                                         </li>
                                         <li><a class="smoth-scroll" href="#about">О калькуляторе</a>
                                         </li>
-                                        <li><a class="smoth-scroll" href="#service">Расчет</a>
+                                        <li><a class="smoth-scroll" href="{% url 'core:calculate' %}">Расчет</a>
                                         </li>
                                         {% if user.is_authenticated %}
                                           <li>
@@ -71,6 +71,10 @@
                                           <li>
                                             <button style="border: none; outline: none; background: transparent; 
                                             "><a class="smoth-scroll" href="{% url 'core:login' %}">Авторизация</a></button> <!--Добавила авторизацию на кнопку-->
+                                          </li>
+                                          <li>
+                                            <button style="border: none; outline: none; background: transparent; 
+                                            "><a class="smoth-scroll" href="{% url 'core:registration' %}">Регистрация</a></button> <!--Добавила авторизацию на кнопку-->
                                           </li>
                                         {% endif %}
                                     </ul>
@@ -83,178 +87,11 @@
             </div>
         </div>
  </header>
-  <!--  Header Section End  -->
+  {% block content %}
 
-  <!--  Home Section Start  -->
-    <section class="home-section" id="home">
-        <div class="home-item">
-            <div class="home-inner">
-                <div class="container">
-                    <h2>Программное <span>средство</span></h2>
-                    <h3 class="cd-headline clip is-full-width">
-                        <span>ДЛЯ ВЫДАЧИ ЭКСПЕРТНЫХ РЕШЕНИЙ</span>
-                        
-                        <!--<span class="cd-words-wrapper">
-                            <b class="is-visible">Development.</b>
-                            <b>SEO.</b> 
-                            <b>Design.</b>
-                            <b>Photography.</b>
-                            <b>WordPress.</b>
-                        </span>-->
-                    </h3>
-                    
+  {% endblock content %}
 
-                        <a href="#about" class="bouncing-icon smoth-scroll"><i class="fas fa-chevron-down"></i></a> 
-                </div>
-            </div>
-        </div>
-    </section>
-  <!-- ==== Home Section End ==== -->
-
-  <!-- ==== About Section Start ==== -->
-   <section id="about" class="about section-padding">
-       <div class="container">
-
-            <div class="row">
-               <div class="col-md-6">
-                   <div class="about-us-left">
-                       <h4 class="about-title">О  <span>КАЛЬКУЛЯТОРЕ</span></h4>
-                      
-                       <p>Данное программное средство поможет не просто рассчитать стоимость желаемой продукции, а подберет оптимальный способ печати.</p>
-                       <p>Используя данный калькулятор, Вы можете сразу задавать необходимый формат готового изделия, не тратя времеми на раскладку на печатный лист. Программа самостоятельно выберет наиболее рациональный формат печатного листа и раскладку изделия на нём. При указании красочности для плашек следует добавлять 1 краску.</p>
-                       <div class="about-btn">
-                           <a href="#" class="">Начать расчет</a>
-                       </div>
-                   </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="about-img">
-                        <img src="{% static 'core/image/about/about.jpg' %}" alt="">
-                  </div>
-               </div>
-           </div>
-       </div>
-   </section>
-  
-   <!-- ==== Service Section Start ==== -->
-   <section id="service" class="service section-padding">
-       <div class="container">
-            <div class="row">
-               <div class="section-title">
-                    <div class="main-title">
-                        <h4><span>Расчет</span></h4>
-                        <h6>Как правильно рассчитать</h6>
-                    </div>
-                    
-               </div>
-            </div>
-            <div class="row ">
-              <div class="services-item">
-                <div class="col-md-4 col-sm-6">
-                  <div class="service-item">
-                    <div class="service-text">
-                      <div class="service-icon"><i class="fas fa-desktop"></i></div> 
-                      <h5>Шаг 1</h5>
-                      <div class="text"><p>Выбрать желаемое изделие для расчета из представленного списка. Или близкое по формату. </p></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4  col-sm-6">
-                  <div class="service-item service-margin">
-                    <div class="service-text">
-                      <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
-                      <h5>Шаг 2</h5>
-                      <div class="text"><p>В диалоговом окне ввести все необходимые данные для расчета: формат, размер, тираж и т.д.</p></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4  col-sm-6">
-                  <div class="service-item ">
-                    <div class="service-text">
-                      <div class="service-icon"><i class="fab fa-medapps"></i></div>
-                      <h5>Шаг 3</h5>
-                      <div class="text"><p>В следующем диалоговом окне выберать подходящий для Вашего изделия материал из списка. </p></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                  <div class="service-item service-margin">
-                    <div class="service-text">
-                      <div class="service-icon"><i class="fas fa-quidditch"></i></div>
-                      <h5>Шаг 4</h5>
-                      <div class="text"><p>Далее Вы можете сразу рассчитать стоимость заказа, либо выбрать постпечатную обработку в столбце справа.</p></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4  col-sm-6 ">
-                  <div class="service-item service-margin ms-0">
-                    <div class="service-text">
-                      <div class="service-icon"><i class="fas fa-camera"></i></div>
-                      <h5>Шаг 5</h5>
-                      <div class="text"><p>Если все данные введены правильно, кнопка «Рассчитать» изменит цвет и станет кликабельной.</p></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4  col-sm-6">
-                  <div class="service-item margin-0 ms-0 service-margin">
-                    <div class="service-text">
-                      <div class="service-icon"><i class="fas fa-user"></i></div>
-                      <h5>Шаг 6</h5>
-                      <div class="text"><p>Получив расчет и экспертную рекомендацию, Вы можете отправить их себе на почту.</p></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-           </div>
-       </div>
-   </section>
-
-
-   <section id="contact"  class="video-section">
-        <div class="row">
-            <div class="company-div col-md-6">
-               <div class="contact-sec">
-              <div class="m-60  paddingtop ">
-                  <div class="row">
-                    <div class="col-md-12">
-                       <div class="divi-title">
-                          <h4>Получить  <span>результаты</span></h4>
-                          <p>Введите Ваши данные и полученные результаты окажутся на Вашей почте.</p>
-                       </div>
-                    </div>
-                  </div>
-                  <div class="contact-form">
-                    <form id="contact-form" class="contact-form" method="post" enctype="multipart/form-data">
-                        <div class="row">
-                           <div class="col-md-12">
-                              <div class="form-group">
-                                 <input type="text" name="name" class="form-control" id="first-name" placeholder="Ваше имя" required="required">
-                              </div>
-                           </div>
-                           <div class="col-md-12">
-                              <div class="form-group">
-                                 <input type="email" name="email" class="form-control" id="email" placeholder="Ваш Email " required="required">
-                              </div>
-                           </div>
-                           <div class="col-md-12">
-                              <div class="form-group">
-                                   <textarea rows="6" name="message" class="form-control" id="description" placeholder="Текст сообщения" required="required"></textarea>
-                              </div>
-                           </div>
-                           <div class="col-md-12 text-center">
-                             <button class="btn submit-btn btn-send contact_btn">Отправить</button>
-                           </div>
-                        </div>
-                    </form>
-                  </div>
-              </div>
-               </div>
-            </div>
-            {% include 'core/calculate.html' %}
-        </div>
-   </section>
-    <!-- All JS Here -->
-     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
     <script src="{% static 'core/js/jquery.js' %}"></script>
     <script src="{% static 'core/bootstrap/js/bootstrap.min.js' %}"></script>
@@ -268,5 +105,8 @@
     <script src="{% static 'core/js/contact.js' %}"></script>
     <script src="{% static 'core/js/main.js' %}"></script>
     <script src="{% static 'core/js/main.js' %}"></script>
+    {% block jquery %}
+
+    {% endblock jquery %}
 </body>
 </html>

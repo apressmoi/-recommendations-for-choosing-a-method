@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Paper(models.Model):
@@ -62,6 +63,19 @@ class TypePrint(models.Model):
 
     def __str__(self):
         return self.name_print
+
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    result = models.ForeignKey(TypePrint, blank=True, null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Профиль"
+        verbose_name_plural = "Профили"
+
+    def __str__(self):
+        return f'Профиль пользователя {self.user.username}'
+    
 
     
 
