@@ -36,9 +36,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles',    
+    'rest_framework',
     'core',
 ]
+
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,3 +140,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static','core')
+LOGIN_URL = 'core:login'
+LOGIN_REDIRECT_URL = 'core:home-page'
+
+
+# Тут повнимательнее
+# Заходишь на Gmail в безопасность - (Ненадежные приложения, у которых есть доступ к аккаунту)
+# Открываешь доступ
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+# Тут вбиваешь свое мыло от gmail 
+EMAIL_HOST_USER = '#'
+# Тут пасс от этого мыла
+EMAIL_HOST_PASSWORD = "#"
+

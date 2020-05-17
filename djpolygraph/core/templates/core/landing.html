@@ -1,0 +1,154 @@
+{% extends 'core/home.html' %}
+{% load static %}
+
+{% block content %}
+  <!--  Home Section Start  -->
+    <section class="home-section" id="home">
+        <div class="home-item">
+            <div class="home-inner">
+                <div class="container">
+                    <h2>Программное <span>средство</span></h2>
+                    <h3 class="cd-headline clip is-full-width">
+                        <span>ДЛЯ ВЫДАЧИ ЭКСПЕРТНЫХ РЕШЕНИЙ</span>
+                    </h3>
+                    
+
+                        <a href="#about" class="bouncing-icon smoth-scroll"><i class="fas fa-chevron-down"></i></a> 
+                </div>
+            </div>
+        </div>
+    </section>
+  <!-- ==== Home Section End ==== -->
+
+  <!-- ==== About Section Start ==== -->
+   <section id="about" class="about section-padding">
+       <div class="container">
+
+            <div class="row">
+               <div class="col-md-6">
+                   <div class="about-us-left">
+                       <h4 class="about-title">О  <span>КАЛЬКУЛЯТОРЕ</span></h4>
+                      
+                       <p>Данное программное средство поможет не просто рассчитать стоимость желаемой продукции, а подберет оптимальный способ печати.</p>
+                       <p>Используя данный калькулятор, Вы можете сразу задавать необходимый формат готового изделия, не тратя времеми на раскладку на печатный лист. Программа самостоятельно выберет наиболее рациональный формат печатного листа и раскладку изделия на нём. При указании красочности для плашек следует добавлять 1 краску.</p>
+                       <div class="about-btn">
+                           <a href="{% url 'core:calculate' %}" class="">Начать расчет</a>
+                       </div>
+                   </div>
+               </div>
+               <div class="col-md-6">
+                  <div class="about-img">
+                        <img src="{% static 'core/image/about/about.jpg' %}" alt="">
+                  </div>
+               </div>
+           </div>
+       </div>
+   </section>
+  
+   <!-- ==== Service Section Start ==== -->
+   <section id="service" class="service section-padding">
+       <div class="container">
+            <div class="row">
+               <div class="section-title">
+                    <div class="main-title">
+                        <h4><span>Расчет</span></h4>
+                        <h6>Как правильно рассчитать</h6>
+                    </div>
+                    
+               </div>
+            </div>
+            <div class="row ">
+              <div class="services-item">
+                <div class="col-md-4 col-sm-6">
+                  <div class="service-item">
+                    <div class="service-text">
+                      <div class="service-icon"><i class="fas fa-desktop"></i></div> 
+                      <h5>Шаг 1</h5>
+                      <div class="text"><p>Выбрать желаемое изделие для расчета из представленного списка. Или близкое по формату. </p></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4  col-sm-6">
+                  <div class="service-item service-margin">
+                    <div class="service-text">
+                      <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
+                      <h5>Шаг 2</h5>
+                      <div class="text"><p>В диалоговом окне ввести все необходимые данные для расчета: формат, размер, тираж и т.д.</p></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4  col-sm-6">
+                  <div class="service-item ">
+                    <div class="service-text">
+                      <div class="service-icon"><i class="fab fa-medapps"></i></div>
+                      <h5>Шаг 3</h5>
+                      <div class="text"><p>В следующем диалоговом окне выберать подходящий для Вашего изделия материал из списка. </p></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                  <div class="service-item service-margin">
+                    <div class="service-text">
+                      <div class="service-icon"><i class="fas fa-quidditch"></i></div>
+                      <h5>Шаг 4</h5>
+                      <div class="text"><p>Далее Вы можете сразу рассчитать стоимость заказа, либо выбрать постпечатную обработку в столбце справа.</p></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4  col-sm-6 ">
+                  <div class="service-item service-margin ms-0">
+                    <div class="service-text">
+                      <div class="service-icon"><i class="fas fa-camera"></i></div>
+                      <h5>Шаг 5</h5>
+                      <div class="text"><p>Если все данные введены правильно, кнопка «Рассчитать» изменит цвет и станет кликабельной.</p></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4  col-sm-6">
+                  <div class="service-item margin-0 ms-0 service-margin">
+                    <div class="service-text">
+                      <div class="service-icon"><i class="fas fa-user"></i></div>
+                      <h5>Шаг 6</h5>
+                      <div class="text"><p>Получив расчет и экспертную рекомендацию, Вы можете отправить их себе на почту.</p></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+           </div>
+       </div>
+   </section>
+
+
+   <section id="contact"  class="video-section">
+        <div class="row">
+            <div class="company-div col-md-6">
+               <div class="contact-sec">
+              <div class="m-60  paddingtop ">
+                  <div class="row">
+                    <div class="col-md-12">
+                       <div class="divi-title">
+                          <h4>Получить  <span>результаты</span></h4>
+                          <p> Нажмите на кнопку отправить чтобы получить экспертные данные.</p>
+                       </div>
+                    </div>
+                  </div>
+                  <div class="contact-form">
+                        <div class="row">
+                           <div class="col-md-12 text-center">
+                             <a href="{% url 'core:send-message' %}">
+                              <button class="btn submit-btn btn-send contact_btn">
+                                  Отправить
+                              </button>
+                              </a>
+                           </div>
+                        </div>
+                  </div>
+              </div>
+               </div>
+            </div>
+        </div>
+   </section>
+
+   {% endblock content %}
+</body>
+</html>
