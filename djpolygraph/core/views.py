@@ -27,8 +27,6 @@ def register(request):
     form = UserRegisterForm(request.POST or None)
     if form.is_valid():
         user = form.save(commit=False)
-        password = form.cleaned_data.get('password')
-        user.set_password(password) 
         user.save()
         return redirect('core:login')
     return render(request, 'core/registration.html', {'register_form': form})

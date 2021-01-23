@@ -6,3 +6,5 @@
 .cache
 ritos/
 vscode/
+.idea
+env/
