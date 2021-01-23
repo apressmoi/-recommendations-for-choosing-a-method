@@ -2,11 +2,12 @@
 {% load static%}
 
 {% block content %}
+
 <form class="form-horizontal" method="post" action="{% url 'core:calculate' %}">
     {% csrf_token %}
     {{ calc_form.as_p }}
     <div class="form-group">
-        <button type="submit" class="btn btn-default">Расчитать</button>
+        <button type="submit" class="btn btn-default" onclick="renderResult()">Расчитать</button>
     </div>
 </form>
 
@@ -14,7 +15,7 @@
 $(document).ready(function(){
     initPaperChoice();
     $('#id_production').change(function(){
-        var selected = $('#id_production option:selected').text();
+        let selected = $('#id_production option:selected').text();
         request_url = `http://localhost:8000/api/${selected}/`;
         $.ajax({
             url: request_url,
@@ -36,8 +37,8 @@ $(document).ready(function(){
 })
 
 function initPaperChoice(){
-    var default_value = $('#id_production option:selected').text();
-    request_url = `http://localhost:8000/api/${default_value}/`;
+    let default_value = $('#id_production option:selected').text();
+    let request_url = `http://localhost:8000/api/${default_value}/`;
     $.ajax({
             url: request_url,
             success: function(data){
@@ -48,6 +49,22 @@ function initPaperChoice(){
                     $('#id_paper').append('<option value="' + data[0]['paper'][i] + '">'+ data[0]['paper'][i] + '</option>');
                 }
                 
+            },
+            errors: function(err){
+                console.log(err);
+            }
+    })
+}
+function renderResult(){
+    let request_url = `http://localhost:8000/api/result/philip`;
+    $.ajax({
+            url: request_url,
+            success: function(data){
+                data: data,
+                console.log(data);
+                let res = document.querySelector('div.result-block');
+                res.innerText = "Рекомендованный способ печати: " + data.name_print;
+
             },
             errors: function(err){
                 console.log(err);

@@ -1,6 +1,7 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import TypePrint, Profile
+from .utils.http_result_choice_response import HttpResultResponse
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Min, Max
 from .forms import UserLoginForm, UserRegisterForm, CalculateForm
@@ -52,8 +53,8 @@ def calculate_view(request):
             colorfulness__colorfulness__icontains=colorfulness,
             count__min_count__lte=count,
             count__max_count__gte=count,
-            )
-        
+        )
+
         if len(type_printing) > 1:
             minimal_count = type_printing.aggregate(Min('count__max_count'))['count__max_count__min']
             result = TypePrint.objects.get(count__max_count=minimal_count)
@@ -62,7 +63,7 @@ def calculate_view(request):
         profile = Profile.objects.get(user=request.user)
         profile.result = result
         profile.save()
-        return redirect('core:home-page')
+        return HttpResultResponse()
     return render(request, 'core/calculate.html', {'calc_form': form})
 
 
@@ -70,16 +71,14 @@ def calculate_view(request):
 def send_message_to_email(request):
     profile = Profile.objects.get(user=request.user)
     result_calculate = profile.result
-    if result_calculate == None:
+    if result_calculate is None:
         return redirect('core:calculate')
     another_product = [obj.name_product for obj in profile.result.production.all()]
     subject = "Расчет от сайта calculator 2.0"
     message = f"""Здравствуйте {request.user}! Наилучшим результатом для вашего последнего
     расчета явлется выбор печати: {profile.result.name_print}, благодаря ей вы также можете печатать
     {another_product}"""
-    _from =  'calculator2@gmail.com' 
+    _from = 'calculator2@gmail.com'
     _to = profile.user.email
     send_mail(subject, message, _from, [_to])
     return redirect('core:home-page')
-    
-

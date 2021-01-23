@@ -4,6 +4,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+<link rel="stylesheet" href="{% static 'core/css/result.css' %}" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="{% static 'core/css/signup.css' %}"/>
@@ -27,12 +28,12 @@
       <div role="tabpanel" class="tab-pane fade in active" id="Section1">
          {% include 'core/calc_form.html' %}
       </div>
- </div>
- 
- </div>
+     <div class="result-block">
 
+    </div>
+ </div>
+ </div>
 </div><!-- /.col-md-offset-3 col-md-6 -->
 </div><!-- /.row -->
 </div><!-- /.container -->
-
 {% endblock %}
