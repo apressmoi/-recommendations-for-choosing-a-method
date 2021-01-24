@@ -119,7 +119,7 @@ class UserRegisterForm(UserCreationForm):
 
 
 class CalculateForm(forms.Form):
-    production = forms.ChoiceField(label="Тип продукции",widget=forms.Select(
+    production = forms.ChoiceField(label="Тип продукции", widget=forms.Select(
         attrs={
             'class': 'form-control',
             'placeholder': 'Выберите тип продукции',
@@ -132,7 +132,7 @@ class CalculateForm(forms.Form):
             'placeholder': 'Выберите красочность',
             'autocomplete': 'off'
         }
-    ), choices=[(obj.colorfulness,obj.colorfulness) for obj in Colorfulness.objects.all()])
+    ), choices=[(obj.colorfulness, obj.colorfulness) for obj in Colorfulness.objects.all()])
     count = forms.IntegerField(label="Тираж", widget=forms.NumberInput(
         attrs={
             'class': 'form-control',
@@ -141,7 +141,7 @@ class CalculateForm(forms.Form):
         }
     ))
 
-    paper = forms.ChoiceField(label="Максим Бумага", widget=forms.Select(
+    paper = forms.ChoiceField(label="Бумага", widget=forms.Select(
         attrs={
             'class': 'form-control',
             'id': 'id_paper',

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Production
+from .models import Production, TypePrint
 
 
 class ProductionSerializer(serializers.Serializer):
@@ -12,4 +12,13 @@ class ProductionSerializer(serializers.Serializer):
             'name_product',
             'paper'
         ]
-       
+
+
+class TypePrintSerializer(serializers.Serializer):
+    name_print = serializers.CharField()
+
+    class Meta:
+        model = TypePrint
+        fields = [
+            'name_print',
+        ]
